@@ -43,36 +43,60 @@ void print_node(Node* n){
     printf("\n");
 }
 
-int is_valid(Node* n){
+int is_valid(Node *n) {
+    int i, j, k, p;
+    int row_check[9][10] = {0}; // Para verificar números en filas
+    int col_check[9][10] = {0}; // Para verificar números en columnas
+    int subgrid_check[9][10] = {0}; // Para verificar números en submatrices de 3x3
 
-    return 1;
+    // Verificar filas y columnas
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            int num = n->sudo[i][j];
+            if (num != 0) {
+                if (row_check[i][num] || col_check[j][num])
+                    return 0; // Número repetido en fila o columna
+                row_check[i][num] = 1;
+                col_check[j][num] = 1;
+            }
+        }
+    }
+
+    // Verificar submatrices de 3x3
+    for (k = 0; k < 9; k++) {
+        for (p = 0; p < 9; p++) {
+            i = 3 * (k / 3) + (p / 3);
+            j = 3 * (k % 3) + (p % 3);
+            int num = n->sudo[i][j];
+            if (num != 0) {
+                if (subgrid_check[k][num])
+                    return 0; // Número repetido en submatriz
+                subgrid_check[k][num] = 1;
+            }
+        }
+    }
+
+    return 1; // Estado válido
 }
 
 
-List* get_adj_nodes(Node* n){
-  List* list=createList();
-  int i,j;
-  for(i=0;i<9;i++){
-    for(j=0;j<9;j++){
-      if(n->sudo[i][j]==0){
-        for(int k=1;k<10;k++){
-          Node* adj=copy(n);
-          adj->sudo[i][j]=k;
-          if(is_valid(adj)){
-            pushBack(list,adj);
-            
-          }
-          
+//Funcion que genera una lista de los nodos adyacentes al nodo recibido
+List* get_adj_nodes(Node* nodo){
+  List* list = createList();
+  //Se recorre la matriz
+  for(int i = 0 ; i < 9 ; i++){
+    for(int j = 0 ; j < 9 ; j++){
+      //Si el valor en 
+      if(nodo->sudo[i][j] == 0){
+        for(int k = 1 ; k < 10 ; k++){
+          Node* adj = copy(nodo);
+          adj->sudo[i][j] = k;
+          if(is_valid(adj)) pushBack(list, adj);
         }
         return list;
-        
       }
-      
     }
-    
   }
-  
-
   return list;
 }
 
