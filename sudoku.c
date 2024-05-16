@@ -44,35 +44,28 @@ void print_node(Node* n){
 }
 
 int is_valid(Node *n) {
-    int i, j;
-    int row_check[9][10] = {0}; // Para verificar números en filas
-    int col_check[9][10] = {0}; // Para verificar números en columnas
-    int subgrid_check[9][10] = {0}; // Para verificar números en submatrices de 3x3
+  int filas[9][10] = {0}; // Para verificar numeros en filas
+  int cols[9][10] = {0}; // Para verificar numeros en columnas
+  int subm[9][10] = {0}; // Para verificar numeros en submatrices de 3x3
 
-    for (i = 0; i < 9; i++) {
-        for (j = 0; j < 9; j++) {
-            int num = n->sudo[i][j];
-            if (num != 0) {
-                // Verificar fila
-                if (row_check[i][num])
-                    return 0; // Número repetido en fila
-                row_check[i][num] = 1;
-
-                // Verificar columna
-                if (col_check[j][num])
-                    return 0; // Número repetido en columna
-                col_check[j][num] = 1;
-
-                // Verificar submatriz
-                int subgrid_index = (i / 3) * 3 + (j / 3);
-                if (subgrid_check[subgrid_index][num])
-                    return 0; // Número repetido en submatriz
-                subgrid_check[subgrid_index][num] = 1;
-            }
-        }
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 9; j++) {
+      if (n->sudo[i][j] != 0){
+        //Si el numero ya existe en la fila, retorna 0.
+        if (filas[i][num]) return 0;
+        filas[i][num] = 1;
+        //Si el numero ya existe en la columna, retorna 0.
+        if (cols[j][num]) return 0;
+        cols[j][num] = 1;
+        // Verificar submatriz
+        int subm_num = (i/3)*3 + (j/3);
+        //Si el numero ya existe en la matriz, retorna 0.
+        if (subm[subm_num][num]) return 0;
+        subm[subm_num][num] = 1;
+      }
     }
-
-    return 1; // Estado válido
+  }
+  return 1;
 }
 
 
@@ -80,8 +73,8 @@ int is_valid(Node *n) {
 List* get_adj_nodes(Node* nodo){
   List* list = createList();
   //Se recorre la matriz
-  for(int i = 0 ; i < 9 ; i++){
-    for(int j = 0 ; j < 9 ; j++){
+  for(int i = 0; i < 9; i++){
+    for(int j = 0; j < 9; j++){
       //Si el valor en 
       if(nodo->sudo[i][j] == 0){
         for(int k = 1 ; k < 10 ; k++){

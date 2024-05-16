@@ -16,3 +16,24 @@ Thu 16 May 2024 04:14:47 AM UTC:
  tests:  6|2
 total_score: 45/70
 ff378eb
+Thu 16 May 2024 04:30:49 AM UTC: 
+ sudoku.c | 41 +++++++++++++++++------------------------
+ 1 file changed, 17 insertions(+), 24 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘is_valid’:
+sudoku.c:55:22: error: ‘num’ undeclared (first use in this function)
+   55 |         if (filas[i][num]) return 0;
+      |                      ^~~
+sudoku.c:55:22: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:49:7: error: variable ‘subm’ set but not used [-Werror=unused-but-set-variable]
+   49 |   int subm[9][10] = {0}; // Para verificar numeros en submatrices de 3x3
+      |       ^~~~
+sudoku.c:48:7: error: variable ‘cols’ set but not used [-Werror=unused-but-set-variable]
+   48 |   int cols[9][10] = {0}; // Para verificar numeros en columnas
+      |       ^~~~
+sudoku.c:47:7: error: variable ‘filas’ set but not used [-Werror=unused-but-set-variable]
+   47 |   int filas[9][10] = {0}; // Para verificar numeros en filas
+      |       ^~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+80db6d3
