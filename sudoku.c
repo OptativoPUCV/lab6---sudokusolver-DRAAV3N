@@ -44,34 +44,30 @@ void print_node(Node* n){
 }
 
 int is_valid(Node *n) {
-    int i, j, k, p;
+    int i, j;
     int row_check[9][10] = {0}; // Para verificar números en filas
     int col_check[9][10] = {0}; // Para verificar números en columnas
     int subgrid_check[9][10] = {0}; // Para verificar números en submatrices de 3x3
 
-    // Verificar filas y columnas
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
             int num = n->sudo[i][j];
             if (num != 0) {
-                if (row_check[i][num] || col_check[j][num])
-                    return 0; // Número repetido en fila o columna
+                // Verificar fila
+                if (row_check[i][num])
+                    return 0; // Número repetido en fila
                 row_check[i][num] = 1;
-                col_check[j][num] = 1;
-            }
-        }
-    }
 
-    // Verificar submatrices de 3x3
-    for (k = 0; k < 9; k++) {
-        for (p = 0; p < 9; p++) {
-            i = 3 * (k / 3) + (p / 3);
-            j = 3 * (k % 3) + (p % 3);
-            int num = n->sudo[i][j];
-            if (num != 0) {
-                if (subgrid_check[k][num])
+                // Verificar columna
+                if (col_check[j][num])
+                    return 0; // Número repetido en columna
+                col_check[j][num] = 1;
+
+                // Verificar submatriz
+                int subgrid_index = (i / 3) * 3 + (j / 3);
+                if (subgrid_check[subgrid_index][num])
                     return 0; // Número repetido en submatriz
-                subgrid_check[k][num] = 1;
+                subgrid_check[subgrid_index][num] = 1;
             }
         }
     }
