@@ -37,3 +37,9 @@ sudoku.c:47:7: error: variable ‘filas’ set but not used [-Werror=unused-but-
 cc1: all warnings being treated as errors
 Compilation failed
 80db6d3
+Thu 16 May 2024 04:32:41 AM UTC: 
+ sudoku.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+ tests:  6|2
+total_score: 45/70
+1551b9a

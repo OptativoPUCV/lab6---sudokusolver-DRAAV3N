@@ -50,18 +50,19 @@ int is_valid(Node *n) {
 
   for (int i = 0; i < 9; i++) {
     for (int j = 0; j < 9; j++) {
+      int elem = n->sudo[i][j];
       if (n->sudo[i][j] != 0){
         //Si el numero ya existe en la fila, retorna 0.
-        if (filas[i][num]) return 0;
-        filas[i][num] = 1;
+        if (filas[i][elem]) return 0;
+        filas[i][elem] = 1;
         //Si el numero ya existe en la columna, retorna 0.
-        if (cols[j][num]) return 0;
-        cols[j][num] = 1;
+        if (cols[j][elem]) return 0;
+        cols[j][elem] = 1;
         // Verificar submatriz
         int subm_num = (i/3)*3 + (j/3);
         //Si el numero ya existe en la matriz, retorna 0.
-        if (subm[subm_num][num]) return 0;
-        subm[subm_num][num] = 1;
+        if (subm[subm_num][elem]) return 0;
+        subm[subm_num][elem] = 1;
       }
     }
   }
