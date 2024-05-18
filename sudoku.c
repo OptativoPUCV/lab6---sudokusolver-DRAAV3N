@@ -117,9 +117,13 @@ Node* DFS(Node* initial, int* cont){
         return aux;
       }
       aux = next(adj);
+      
     }
-    
+    popFront(adj);
   }
+
+
+  
   
   return NULL;
 }
