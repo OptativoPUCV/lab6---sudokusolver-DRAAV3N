@@ -90,7 +90,7 @@ List* get_adj_nodes(Node* nodo){
   return list;
 }
 
-
+//recorre el cada casilla del nodo, verificando si hay algun valor diferente de 0.
 int is_final(Node* n){
   for(int i = 0; i < 9; i++){
     for(int j = 0; j < 9; j++){
@@ -101,6 +101,24 @@ int is_final(Node* n){
 }
 
 Node* DFS(Node* initial, int* cont){
+  Stack *S = createStack();
+  push(S, initial);
+  while(S != NULL){
+    Node* n = top(S); //saco el nodo del tope de la pila
+    pop(S); //luego lo elmino de la pila
+    if(is_final(n)){
+      return n;
+    }
+    else{
+      List* adj = get_adj_nodes(n); //obtener todos los nodos adyacentes al nodo
+      //Agregarlos al stack uno por uno.
+      while(first(adj) != NULL){
+        push(S, first(adj));
+        popFront(adj);
+      }
+    }
+  }
+  free(S);
   return NULL;
 }
 
