@@ -109,16 +109,14 @@ Node* DFS(Node* initial, int* cont){
     if(is_final(n)){
       return n;
     }
-    else{
-      List* adj = get_adj_nodes(n); //obtener todos los nodos adyacentes al nodo
-      //Agregarlos al stack uno por uno.
-      while(first(adj) != NULL){
-        push(S, first(adj));
-        popFront(adj);
-      }
+    List *list = get_adj_nodes(n);
+    Node *aux = first(list);
+    for(int i = 0; i < get_size(list); i++){
+      push(S, aux);
+      aux = next(list);
     }
   }
-  free(S);
+  return NULL;
 }
 
 
