@@ -106,7 +106,7 @@ int is_final(Node* n){
 Node* DFS(Node* initial, int* cont){
   Stack *S = createStack();
   push(S, initial);
-  while(S != NULL){
+  while(top(S) != NULL){
     Node* n = top(S); //saco el nodo del tope de la pila
     pop(S); //luego lo elmino de la pila
     if(is_final(n)){
