@@ -114,15 +114,14 @@ Node* DFS(Node* initial, int* cont){
     }
     List *adj = get_adj_nodes(n);
     Node *aux = first(adj);
-    while(aux != NULL){
+    for(int i = 0; i < get_size(adj); i++){
       push(S, aux);
       if(is_final(aux)){
         return aux;
       }
       aux = next(adj);
-      
     }
-    popFront(adj);
+    
   }
 
 
