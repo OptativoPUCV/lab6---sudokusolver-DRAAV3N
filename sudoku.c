@@ -92,6 +92,9 @@ List* get_adj_nodes(Node* nodo){
 
 //recorre el cada casilla del nodo, verificando si hay algun valor diferente de 0.
 int is_final(Node* n){
+  if (n == NULL) {
+      return 0;  // Si el nodo es NULL, no es un estado final1
+  }
   for(int i = 0; i < 9; i++){
     for(int j = 0; j < 9; j++){
       if(n->sudo[i][j] == 0) return 0;
